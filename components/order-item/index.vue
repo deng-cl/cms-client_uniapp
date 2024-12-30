@@ -88,7 +88,8 @@
 	background-color: white;
 	width: 100%;
 	border-radius: 6rpx;
-	box-shadow: 1px 1px 4px #dadada;
+	// box-shadow: 1px 1px 4px #dadada;
+	box-shadow: 1px 1px 4px #dadada7d;
 	padding: 16rpx;
 	box-sizing: border-box;
 	display: flex;

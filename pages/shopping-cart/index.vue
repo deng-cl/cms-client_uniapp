@@ -10,7 +10,6 @@ import useAddressStore, { type IAddress } from "../../stores/address";
 import { confirmModal } from "../../utils";
 import { fetchOrderSubmitMultiple, type IOrderSubmitInfo } from "../../service/modules/profile";
 
-
 const store = useShoppingCartStore()
 
 const itemsRef = ref(null)
@@ -57,6 +56,7 @@ const setAddressData = (newAddress:IAddress) => {
 // -- 购买购物车商品: 购物车商品批量购买（订单提交）
 const showOrdersSubmitPopup = ref(false)
 const submitCartOrders = async () => {
+	showOrdersSubmitPopup.value = false
 	if(await confirmModal("请您再次确定购买","商品购买")) {
 		// -- 创建购物车中所有商品的订单提交的信息
 		const buyOrderDataList: IOrderSubmitInfo[] = []
@@ -78,7 +78,9 @@ const submitCartOrders = async () => {
 			buyOrderDataList.push(orderData)
 		})
 		// -- 提交所有订单
-		fetchOrderSubmitMultiple(buyOrderDataList)
+		await fetchOrderSubmitMultiple(buyOrderDataList)
+		// -- 重置总计价格
+		totalPrice.value = 0
 	}
 }
 </script>

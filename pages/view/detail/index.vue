@@ -70,6 +70,7 @@ const setAddressData = (newAddress:IAddress) => {
 
 // -- 提交购买订单 → 购买商品
 const confirmBuyOrder = async () => { 
+	showOrderSubmitPopup.value = false
 	const orderData:IOrderSubmitInfo = {
 		product_name: productData.value?.product_name,
 		product_desc: productData.value?.product_desc,

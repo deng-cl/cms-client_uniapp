@@ -89,7 +89,8 @@ const toProductDetail = () => {
 	background-color: white;
 	padding: 24rpx;
 	border-radius: 8rpx;
-	box-shadow: 1px 1px 4px #dadada;
+	// box-shadow: 1px 1px 4px #dadada;
+	box-shadow: 1px 1px 4px #dadada7d;
 	.top {
 		display: flex;
 		flex-flow: row nowrap;

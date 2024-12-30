@@ -7,6 +7,9 @@ import Title from "../../components/title/index.vue"
 import ProductItem from "../../components/product-item/index.vue"
 import { IProductData, fetchGetProductByTagname } from "../../service/modules/classify";
 import { fetchGetHasDiscountProducts } from "../../service/modules/home";
+import useAddressStore from "../../stores/address";
+
+useAddressStore().getRefreshAddresses() // -- 初始化地址数据
 
 // -- 热销商品
 const hotSales = ref<IProductData[]>([])

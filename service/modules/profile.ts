@@ -131,27 +131,30 @@ export const fetchOrderSubmit:(orderData:IOrderSubmitInfo) => void = async (orde
 
 // -- 批量订单提交
 export const fetchOrderSubmitMultiple:(orderDatas:IOrderSubmitInfo[]) => Promise<any> = async (orderDatas) => {
-	uni.showLoading({title: "正在提交所有订单信息...", mask:true })
-	setTimeout(() => {
-		uni.hideLoading()
-		uni.showLoading({title: "订单模拟支付中...", mask:true })
-		setTimeout(async () => {
+	return new Promise((resolve,reject) => {
+		uni.showLoading({title: "正在提交所有订单信息...", mask:true })
+		setTimeout(() => {
 			uni.hideLoading()
-			const fetchs = []
-			orderDatas.forEach(orderData => { // -- 遍历订单提交
-				fetchs.push(http.post("/order/submit", orderData, true))
-			})
-			const results = await  Promise.all(fetchs) // -- 同意发起所有请求
-			console.log("results:",results);
-			useShoppingCartStore().deleteEmptyOfShoppingCart() // -- 购买成功，清空购物车
-			if(results[0]?.state == 200) {
-				uni.showToast({ title: "购买成功\r即将为您跳转至订单页面" })
-				setTimeout(() => {
-					uni.navigateTo({ url:"/pages/view/order/index" })
-				},600)
-			} else uni.showToast({ title: results[0]?.msg })
-		},1200)
-	}, 1000)
+			uni.showLoading({title: "订单模拟支付中...", mask:true })
+			setTimeout(async () => {
+				uni.hideLoading()
+				const fetchs = []
+				orderDatas.forEach(orderData => { // -- 遍历订单提交
+					fetchs.push(http.post("/order/submit", orderData, true))
+				})
+				const results = await  Promise.all(fetchs) // -- 同意发起所有请求
+				console.log("results:",results);
+				useShoppingCartStore().deleteEmptyOfShoppingCart() // -- 购买成功，清空购物车
+				if(results[0]?.state == 200) {
+					uni.showToast({ title: "购买成功\r即将为您跳转至订单页面" })
+					resolve("success")
+					setTimeout(() => {
+						uni.navigateTo({ url:"/pages/view/order/index" })
+					},600)
+				} else uni.showToast({ title: results[0]?.msg })
+			},1200)
+		}, 1000)
+	})
 }
 
 

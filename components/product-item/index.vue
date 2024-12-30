@@ -54,7 +54,8 @@
 	border-radius: 8rpx;
 	padding: 8rpx;
 	box-sizing: border-box;
-	box-shadow: 1px 1px 4px #dadada;
+	// box-shadow: 1px 1px 4px #dadada;
+	box-shadow: 1px 1px 4px #dadada7d;
 	
 	.picture {
 		width: 100%;
